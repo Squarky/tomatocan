@@ -204,6 +204,13 @@ Then type
 ```
 at the command line to build the database with the correct schema.
 
+If you get error
+ ActiveRecord::NoDatabaseError: FATAL: database "xxx" does not exist
+then type the following before migrating
+```
+>rake db:create:all
+```
+
 Then type
 ```
 >bin/rails server

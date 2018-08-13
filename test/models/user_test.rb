@@ -233,9 +233,8 @@ class TestUser < ActiveSupport::TestCase
         @user.send "email=", nil 
         refute @user.valid?
         refute_empty @user.errors[:email]
-      end
-    assert_match(/[a-z0-9]/, @user.permalink)
-  end
+        assert_match(/[a-z0-9]/, @user.permalink)
+     end
 
 #before_save { |user| user.email = email.downcase }
 

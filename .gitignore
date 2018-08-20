@@ -11,3 +11,4 @@ config/environments/development.rb
 .DS_Store
 public/phase/
 public/book/
+tutorial/

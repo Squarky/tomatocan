@@ -6,6 +6,9 @@ Monday, August 20, 2018
 
 
 Tasks for Week of August 27, 2018
-- Fix uploaders for merchandise
-- Install calendar gem
+- Fix uploaders for merchandise?
+- Install calendar gem?
+- Investigate Google livestream 
+	- Can go straight to stream without hitting [Join Livestream] button?
+	- Chat side window open by default
 

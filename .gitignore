@@ -3,14 +3,16 @@ db/*.sqlite3
 log/*.log
 tmp/
 public/user/
-public/phase/
 public/merchandise/
-#public/assets/
 .sass-cache/
 config/initializers/aakeys.rb
 config/database.yml
 config/environments/development.rb
 .DS_Store
+<<<<<<< HEAD
 public/phase/
 public/book/
 tutorial/
+=======
+public/book/
+>>>>>>> c2203ada9113c78496f81e0fab1eaeb24007c78d

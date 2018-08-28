@@ -23,38 +23,7 @@ class GroupsController < ApplicationController
     end
   end
 
-  def show
-    currtime = Time.now
-    @currphases = []
-    @group.phases.where("deadline > ?", currtime).find_each do |proj|
-      approvedagreemt = Agreement.where("group_id = ? AND phase_id = ?", @group.id, proj.id )
-      if approvedagreemt[0].approved.present?
-        if approvedagreemt[0].approved > '0002-01-01'
-          author = User.find(proj.user_id)
-          if proj.phasepic.present?
-            picture = proj.phasepic
-          else
-            picture = "whiteBk.jpg"  
-          end
-          @currphases <<  {pic: picture, projtitle: proj.name, authorname: author.name, desc: proj.mission, permalink: proj.permalink } 
-        end
-      end
-    end
-    @pastphases = []
-    @group.phases.where("deadline < ?", currtime).find_each do |proj|
-      approvedagreemt = Agreement.where("group_id = ? AND phase_id = ?", @group.id, proj.id )
-      if approvedagreemt[0].approved.present?
-        if approvedagreemt[0].approved > '0002-01-01'
-          author = User.find(proj.user_id)
-          if proj.phasepic.present?
-            picture = proj.phasepic
-          else
-            picture = "whiteBk.jpg"  
-          end
-          @pastphases <<  {pic: picture, projtitle: proj.name, authorname: author.name, desc: proj.mission, permalink: proj.permalink, authorlink: author.permalink } 
-        end
-      end
-    end  
+  def show 
   end
 
   def news
@@ -63,6 +32,7 @@ class GroupsController < ApplicationController
       format.json { render json: @group }
     end
   end
+
   def calendar
     @month = (params[:month] || (Time.zone || Time).now.month).to_i
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
@@ -72,6 +42,8 @@ class GroupsController < ApplicationController
     @event_strips = @events.event_strips_for_month(@shown_month).where('group2id = ?', @group.id ) + @event_strips
     @event_strips = @events.event_strips_for_month(@shown_month).where('group3id = ?', @group.id ) + @event_strips
   end
+
+
   def eventlist
     @events = Event.where('group1id = ?', @group.id )
     @events = Event.where('group2id = ?', @group.id ) + @events
@@ -136,12 +108,16 @@ class GroupsController < ApplicationController
       format.json { render json: @group1 }
     end
   end
+
+
   def correcterrors
     respond_to do |format|
       format.html # profileinfo.html.erb
       format.json { render json: @group }
     end
   end
+
+
   def manageaccounts
     if @group.stripeid.present? 
       account = Stripe::Account.retrieve(@group.stripeid)
@@ -159,11 +135,14 @@ class GroupsController < ApplicationController
       format.json { render json: @group }
     end
   end
+
+
   def createstripeacnt  #called from button on createstripeaccount page
     @group.create_stripe_acnt(params[:countryoftax], params[:accounttype], params[:firstname], params[:lastname], 
         params[:bizname], params[:birthday], params[:birthmonth], params[:birthyear], request.remote_ip, current_user.email) 
     redirect_to group_addbankaccount_path(@group.permalink)
   end
+  
   def addbankacnt   #called from button on addbankaccount page
     @group.add_bank_account(params[:currency], params[:bankaccountnumber], 
         params[:routingnumber], params[:countryofbank], params[:line1], params[:line2], 

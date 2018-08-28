@@ -1,28 +1,32 @@
 class UsersController < ApplicationController
   layout :resolve_layout
 
-  before_action :set_user, except: [:new, :index, :authors, :approveagreement, :declineagreement, :markfulfilled, :createstripeacnt, :addbankacnt, :correcterr, :create ]
+  before_action :set_user, except: [:new, :index, :userswithmerch, :youtubers, :approveagreement, :declineagreement, :markfulfilled, :createstripeacnt, :addbankacnt, :correcterr, :create ]
   before_action :check_fieldsneeded, except: [:update, :new, :index, :create]
   before_action :check_outstandingagreements, except: [:new, :index, :create, :approveagreement, :declineagreement, :createstripeacnt, :addbankacnt, :correcterr ]
   before_action :authenticate_user!, only: [:edit, :update, :managesales, :createstripeaccount, :addbankaccount, :correcterrors]
 #  before_filter :correct_user,   only: [:edit, :update, :managesales] Why did I comment this out, was I displaying cryptic error messages
   
   def index
-     userswithpic = User.where( "profilepic SIMILAR TO '%(jpg|gif|tif|png|jpeg|GIF|JPG|JPEG|TIF|PNG)'
+    userswithpic = User.where( "profilepic SIMILAR TO '%(jpg|gif|tif|png|jpeg|GIF|JPG|JPEG|TIF|PNG)'
        OR (profilepicurl SIMILAR TO 'http%' AND 
        profilepicurl SIMILAR TO '%(jpg|gif|tif|png|jpeg|GIF|JPG|JPEG|TIF|PNG)%') ")
     @users = userswithpic.paginate(:page => params[:page], :per_page => 32)
   end
 
-  def authors
+  def youtubers
     userswithyoutube = User.where("LENGTH(youtube1) < ? AND LENGTH(youtube1) > ?", 20, 4)
-    authorsvidorder = userswithyoutube.order('updated_at DESC')
-    @authors = authorsvidorder.paginate(:page => params[:page], :per_page => 12)
+    usersvidorder = userswithyoutube.order('updated_at DESC')
+    @youtubers = usersvidorder.paginate(:page => params[:page], :per_page => 32)
+  end
+  def userswithmerch
+    userswmerch = User.joins(:merchandises).distinct
+    merchorder = userswmerch.order('updated_at DESC')
+    @merchusers = merchorder.paginate(:page => params[:page], :per_page => 32)
   end
 
   def show
     @books = @user.books
-    @numusrphs = @user.phases.count
     @numusrgroups = 0 
     if user_signed_in?
       currusergroups = Group.where("user_id = ?", current_user.id)
@@ -44,11 +48,11 @@ class UsersController < ApplicationController
       format.json { render json: @user }
     end
   end
-  def addphasetogroup
+  def agreetopartner 
     @agreement = Agreement.new
     @agreement.update_attribute(:group_id, params[:currgroupid]) 
-    @agreement.update_attribute(:phase_id, params[:phaseid])
-    redirect_to phases_path
+    @agreement.update_attribute(:user_id, params[:userid])
+    redirect_to user_profile_path
   end
 
   def blog
@@ -79,24 +83,6 @@ class UsersController < ApplicationController
   end
   def groups
     @groups = Group.where( "user_id = ?", @user.id )
-    respond_to do |format|
-      format.html 
-      format.json { render json: @user }
-    end
-  end
-  def phases
-    currtime = Time.now
-    @activephases = Phase.where( "user_id = ? AND deadline > ?", @user.id, currtime).order('created_at')
-    @pastphases = Phase.where( "user_id = ? AND deadline < ?", @user.id, currtime).order('created_at')
-    @outstandingagreements = []
-    if user_signed_in?
-      @mynullagreements.each do |agree|
-        phase = Phase.find(agree.phase_id)
-        group = Group.find(agree.group_id) 
-        @outstandingagreements << {phasename: phase.name, groupname: group.name, 
-        agreeid: agree.id, grouppermalink: group.permalink }
-      end
-    end
     respond_to do |format|
       format.html 
       format.json { render json: @user }
@@ -264,13 +250,13 @@ class UsersController < ApplicationController
         params[:state], params[:email]) 
     redirect_to user_profile_path(current_user.permalink)
   end
-  def approveagreement  #called from button on phase page
-    current_user.approve_agreement(params[:agreeid]) 
-    redirect_to user_phases_path(current_user.permalink)
+  def approveagreement  #called from button on
+    current_user.approve_agreement(params[:agreeid]) #this isnt where we want to redirect
+    redirect_to user_profile_path(current_user.permalink)
   end
-  def declineagreement  #called from button on phase page
+  def declineagreement  #called from button on
     current_user.decline_agreement(params[:agreeid])  
-    redirect_to user_phases_path(current_user.permalink)
+    redirect_to user_profile_path(current_user.permalink)
   end
   def markfulfilled  #called from button on author dashboard
     current_user.mark_fulfilled(params[:purchid])  
@@ -339,7 +325,7 @@ class UsersController < ApplicationController
 
     def resolve_layout
       case action_name
-      when "index", "authors"
+      when "index", "youtubers", "userswithmerch"
         'application'
       when "profileinfo", "readerprofileinfo", "managesales", "addbankaccount", "correcterrors", "createstripeaccount", "manageaccounts", "changepassword"
         'editinfotemplate'
@@ -348,7 +334,7 @@ class UsersController < ApplicationController
       end
     end
 
-    def check_fieldsneeded
+    def check_fieldsneeded  #won't need this with stripe standard
       if user_signed_in?
         if current_user.stripeid.present? 
           account = Stripe::Account.retrieve(current_user.stripeid)
@@ -359,17 +345,16 @@ class UsersController < ApplicationController
 
     def check_outstandingagreements
       if user_signed_in?
-        allmyagreements = Agreement.where('phase_id IN 
-        (SELECT id FROM phases WHERE phases.user_id = ?)', current_user.id)
+        allmyagreements = Agreement.where('(user_id = ?)', current_user.id)
         @mynullagreements = allmyagreements.where("approved IS NULL" )
       end
     end
 
     def set_user 
       @user = User.find_by_permalink(params[:permalink]) || current_user
-      if @user.phases.any?
-        @sidebarphase = @user.phases.order('deadline').last 
-        @sidebarmerchandise = @sidebarphase.merchandises.order(price: :asc)
+      if @user.merchandises.any?
+#        @sidebarmerch = @user.merchandises.order('deadline').last 
+        @sidebarmerchandise = @user.merchandises.order(price: :asc)
       end 
     end
      # returns a string of error messages for the user signup page

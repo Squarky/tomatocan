@@ -23,5 +23,7 @@ Observations after joining live hangouts
 Goals for week of September 4
 - carrierwave uploader
 	- read and learn
-	- implement ability for users to upload their sellable docs in merchandises on AWS
-	
+	- implement ability for users to upload their sellable docs in merchandises
+	- change view in 2 page views
+	- test uploaders epub, mobi, pdf
+

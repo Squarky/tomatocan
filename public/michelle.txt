@@ -2,7 +2,6 @@ Scrum Performance Summary - Michelle Gaylor
 
 Monday, August 20, 2018
 - Analyzed user.rb model and users_controller.rb
--
 
 
 Tasks for Week of August 27, 2018
@@ -12,3 +11,17 @@ Tasks for Week of August 27, 2018
 	- Can go straight to stream without hitting [Join Livestream] button?
 	- Chat side window open by default
 
+Accomplishments for week of Aug 27, 2018
+- Played with google hangouts and youtube
+- Hangouts On Air discontinued as videoconference
+- YouTube can set event for a Hangouts that is then livestreamed and archived
+
+Observations after joining live hangouts
+- Youtube livestream would be good if you just want to lurk and not participate
+- If there is a livestream being led, there should be a stated end time
+
+Goals for week of September 4
+- carrierwave uploader
+	- read and learn
+	- implement ability for users to upload their sellable docs in merchandises on AWS
+	

@@ -126,10 +126,6 @@ test "stripe accounts" do
   #   Retrieve accounts object and make sure correct info there
 end
 
-test "external accounts" do
-  #    Retrieve external_accounts object and make sure correct info there
-end
-
 test "parse youtube" do
   @user.youtube1 = "http://youtube.com/watch?v=/frlviTJc"
   @user.genre1 = "yaaah"

@@ -28,6 +28,36 @@ All items offered for sale through CrowdPublish.TV are meant to be immediately a
   <div class="blacktxt">
     <b>Patron Perk name </b><br>
     <%= f.text_field :name, size: 80, placeholder: "The Best Stuff Ever" %><br><br>
+
+    If you have a document you are encouraged to upload in all 3 formats, PDF, .mobi and .epub.<br><br>
+
+      <b>Document</b>  (download as many as applicable)<br>
+      <b>PDF </b><br>
+          Upload a PDF for your patrons to download (.pdf)
+          <br><%= f.file_field :merchpdf, accept: 'application/pdf' %> 
+      <b>mobi </b><br>
+          Upload a MOBI file for your patrons to download (.mobi)
+          <br><%= f.file_field :merchmobi, accept: 'application/mobi' %> 
+      <b>ePub </b><br>
+          Upload an ePub for your patrons to download (.epub)
+          <br><%= f.file_field :merchepub, accept: 'application/epub' %>     
+
+    <br><br>
+
+    <b>Perk podcast/audio </b><br>
+        Upload a podcast or audio file for your patrons to download (.mp3, .wav, or .m4a)
+        <br><%= f.file_field :podcast, accept: 'audio/mp3, audio/wav, audio/m4a' %> 
+    
+    <b>Perk graphic </b><br>
+        Upload a graphic for your patrons to download (.jpg, .jpeg, .gif, .png, or .tif)
+        <br><%= f.file_field :graphic, accept: 'image/jpg, image/jpeg, image/gif, image/png, image/tif' %> 
+
+    <b>Perk video </b><br>
+        Upload a video for your patrons to download (in avi or mp4 format)
+        <br><%= f.file_field :video, accept: 'video/avi, video/mp4' %> 
+
+
+
     <b>Perk Picture </b><br>
         Upload a picture that represents the item you are offering (.jpg, .gif, .jpeg, or .png) - <i>a square picture works best</i>
         <br><%= f.file_field :itempic %> 

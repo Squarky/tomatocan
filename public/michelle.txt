@@ -27,3 +27,10 @@ Goals for week of September 4
 	- change view in 2 page views
 	- test uploaders epub, mobi, pdf
 
+Accomplishments week Sept 4
+- implemented uploaders
+- began implementing functionality on views
+
+Goals week of Sept 10
+- finish uploader pages 
+- Start show pages

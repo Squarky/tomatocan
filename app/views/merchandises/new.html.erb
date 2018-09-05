@@ -25,11 +25,36 @@ All items offered for sale through CrowdPublish.TV are meant to be immediately a
     </div>
   <% end %>
 
+
+
   <div class="blacktxt">
     <b>Patron Perk name </b><br>
     <%= f.text_field :name, size: 80, placeholder: "The Best Stuff Ever" %><br><br>
 
-    If you have a document you are encouraged to upload in all 3 formats, PDF, .mobi and .epub.<br><br>
+    I would like to upload a <br><br>
+
+  <input type="radio" name="merchtype" value="document"> Document (.pdf, .mobi, .epub)<br>
+  <input type="radio" name="merchtype" value="podcast"> Podcast or Audio File<br>
+  <input type="radio" name="merchtype" value="graphic"> Graphic<br>
+  <input type="radio" name="merchtype" value="video"> Video<br>
+<br>
+
+<%= radio_button_tag(:merchtype, "doc") %>
+<%= label_tag(:merchtype_doc, "Doc in pdf, epub, mobi") %>
+<br>If you have a document you are encouraged to upload in all 3 formats, PDF, .mobi and .epub.
+<br>
+<%= radio_button_tag(:merchtype, "video") %>
+<%= label_tag(:merchtype_video, "Video") %>
+<br>
+<%= radio_button_tag(:merchtype, "podcast") %>
+<%= label_tag(:merchtype_video, "Podcast") %>
+<br>
+<%= radio_button_tag(:merchtype, "graphic") %>
+<%= label_tag(:merchtype_video, "Graphic") %>
+<br>
+ 
+<br><br>
+    
 
       <b>Document</b>  (download as many as applicable)<br>
       <b>PDF </b><br>

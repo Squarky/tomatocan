@@ -4,7 +4,7 @@
 All items offered for sale through CrowdPublish.TV are meant to be immediately available and fulfilled within a week. So if you're offering to tweet to them, do it as soon as you see their contribution posted on your dashboard. If you're offering an hour of consulting time, text or call to arrange a session right away! Check your dashboard often.<br><br>
 
           <% if !current_user.stripeid.present? %>
-            You must Sign Up for Stripe to receive payments 
+            You must Sign Up for Stripe to receive payments:<br>
             <% if Rails.env.development? || Rails.env.test? %>
               <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=<%= STRIPE_CONNECT_CLIENT_ID %>&scope=read_write" target="_blank"><%= link_to image_tag("stripebutton.png") %></a>
             <% else %>
@@ -13,7 +13,7 @@ All items offered for sale through CrowdPublish.TV are meant to be immediately a
           <% end %><br><br>
 
 <h3>Offer a new Patron Perk</h3>
-
+<!--if the uploaders don't upload may have to set form's encouding to :multipart => true -->
 <%= form_for(@merchandise) do |f| %>
   <% if @merchandise.errors.any? %>
     <div id="error_explanation">
@@ -33,28 +33,72 @@ All items offered for sale through CrowdPublish.TV are meant to be immediately a
 
     I would like to upload a <br><br>
 
-  <input type="radio" name="merchtype" value="document"> Document (.pdf, .mobi, .epub)<br>
-  <input type="radio" name="merchtype" value="podcast"> Podcast or Audio File<br>
-  <input type="radio" name="merchtype" value="graphic"> Graphic<br>
+<form action="">
+  <input type="radio" name="merchtype" value="document" onclick="hide_doc_uploaders()"> 
+  Document<br>
+  
+    <div id="doc_uploaders">    
+        <b>PDF </b><br>
+          Upload a PDF for your patrons to download (.pdf)
+          <br><%= f.file_field :merchpdf, accept: 'application/pdf' %> 
+      <b>mobi </b><br>
+          Upload a MOBI file for your patrons to download (.mobi)
+          <br><%= f.file_field :merchmobi, accept: 'application/mobi' %> 
+      <b>ePub </b><br>
+          Upload an ePub for your patrons to download (.epub)
+          <br><%= f.file_field :merchepub, accept: 'application/epub' %>  
+
+    </div>
+
   <input type="radio" name="merchtype" value="video"> Video<br>
-<br>
+  <input type="radio" name="merchtype" value="podcast"> Podcast/Audio<br>
+  <input type="radio" name="merchtype" value="graphic"> Graphic<br>
+</form>
+
+<br><br>
+
 
 <%= radio_button_tag(:merchtype, "doc") %>
-<%= label_tag(:merchtype_doc, "Doc in pdf, epub, mobi") %>
+<%= label_tag(:merchtype_doc, "Doc (pdf, epub, mobi)") %>
 <br>If you have a document you are encouraged to upload in all 3 formats, PDF, .mobi and .epub.
 <br>
+      <b>PDF </b><br>
+          Upload a PDF for your patrons to download (.pdf)
+          <br><%= f.file_field :merchpdf, accept: 'application/pdf', style: "#{'display:none' if :merchtype_doc}"%> 
+      <b>mobi </b><br>
+          Upload a MOBI file for your patrons to download (.mobi)
+          <br><%= f.file_field :merchmobi, accept: 'application/mobi' %> 
+      <b>ePub </b><br>
+          Upload an ePub for your patrons to download (.epub)
+          <br><%= f.file_field :merchepub, accept: 'application/epub' %>    
+
+<br><br>
 <%= radio_button_tag(:merchtype, "video") %>
-<%= label_tag(:merchtype_video, "Video") %>
-<br>
+<%= label_tag(:merchtype_video, "Video (avi, mp4)") %> 
+
+    <b>Perk video </b><br>
+        Upload a video for your patrons to download (in avi or mp4 format)
+        <br><%= f.file_field :video, accept: 'video/avi, video/mp4' %> 
+
+<br><br>
 <%= radio_button_tag(:merchtype, "podcast") %>
-<%= label_tag(:merchtype_video, "Podcast") %>
-<br>
+<%= label_tag(:merchtype_video, "Podcast or Audio File (mp3, wav, m4a)") %>
+
+
+      Upload a podcast or audio file for your patrons to download (.mp3, .wav, or .m4a)
+      <br><%= f.file_field :podcast, accept: 'audio/mp3, audio/wav, audio/m4a' %> 
+
+<br><br>
 <%= radio_button_tag(:merchtype, "graphic") %>
-<%= label_tag(:merchtype_video, "Graphic") %>
+<%= label_tag(:merchtype_video, "Graphic (jpg, jpeg, gif, png, tif)") %>
 <br>
+
+      Upload a graphic for your patrons to download (.jpg, .jpeg, .gif, .png, or .tif)
+      <br><%= f.file_field :graphic, accept: 'image/jpg, image/jpeg, image/gif, image/png, image/tif' %> 
  
 <br><br>
     
+<!--
 
       <b>Document</b>  (download as many as applicable)<br>
       <b>PDF </b><br>
@@ -80,7 +124,7 @@ All items offered for sale through CrowdPublish.TV are meant to be immediately a
     <b>Perk video </b><br>
         Upload a video for your patrons to download (in avi or mp4 format)
         <br><%= f.file_field :video, accept: 'video/avi, video/mp4' %> 
-
+-->
 
 
     <b>Perk Picture </b><br>
@@ -121,3 +165,9 @@ All items offered for sale through CrowdPublish.TV are meant to be immediately a
 <% end %>
 </div>
 </div>
+
+<script type="text/javascript">
+function hide_doc_uploaders() {
+    document.getElementById("doc_uploaders").style.display = "none";
+}
+</script>

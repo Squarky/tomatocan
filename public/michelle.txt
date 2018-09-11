@@ -34,3 +34,8 @@ Accomplishments week Sept 4
 Goals week of Sept 10
 - finish uploader pages 
 - Start show pages
+
+Goals week of Sept 17
+- finish uploader pages if necessary
+- on home page, when click on a Host, bring to host page and also open lifestream window (hangouts).  Javascript
+- On http://localhost:3000/merchandises/standardperks page, draw attention at top of page to Documents and maybe one other perk, then list the rest on the bottom.  Make it prettier.

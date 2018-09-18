@@ -34,42 +34,23 @@ All items offered for sale through CrowdPublish.TV are meant to be immediately a
     <b>Patron Perk name </b><br>
     <%= f.text_field :name, size: 80, placeholder: "The Best Stuff Ever" %><br><br>
 
-    I would like to upload a <br><br>
-
-<br><br>
-  <form 
-  <input type="radio" name="merchtype" value="doc"> 
-  Document<br>
-
-        <b>PDF </b><br>
-          Upload a PDF for your patrons to download (.pdf)
-          <br><%= f.file_field :merchpdf, accept: 'application/pdf'  %> 
-      <b>mobi </b><br>
-          Upload a MOBI file for your patrons to download (.mobi)
-          <br><%= f.file_field :merchmobi, accept: 'application/mobi' %> 
-      <b>ePub </b><br>
-          Upload an ePub for your patrons to download (.epub)
-          <br><%= f.file_field :merchepub, accept: 'application/epub' %>  
-
-  <input type="radio" name="merchtype" value="video"> Video<br>
-  <input type="radio" name="merchtype" value="podcast"> Podcast/Audio<br>
-  <input type="radio" name="merchtype" value="graphic"> Graphic<br>
-
-
-<br><br>
-
+    I would like to upload a: <br><br>
+ 
 
 <%= radio_button_tag(:merchtype, "doc") %>
-<%= label_tag(:merchtype_doc, "Doc (pdf, epub, mobi)") %>
+<%= label_tag(:merchtype_doc, "Document (pdf, epub, mobi)") %>
 <br>If you have a document you are encouraged to upload in all 3 formats, PDF, .mobi and .epub.
-<br>
+<br>(Upload as many as applicable)
+<br><br>
       <b>PDF </b><br>
           Upload a PDF for your patrons to download (.pdf)
           <!-- how to access the value for the radio button from ruby? Or how to disable field in JS? -->
-          <br><%= f.file_field :merchpdf, accept: 'application/pdf', disabled: (true) %> 
+          <br><%= f.file_field :merchpdf, accept: 'application/pdf' %> 
+          <br>
       <b>mobi </b><br>
           Upload a MOBI file for your patrons to download (.mobi)
           <br><%= f.file_field :merchmobi, accept: 'application/mobi' %> 
+          <br>
       <b>ePub </b><br>
           Upload an ePub for your patrons to download (.epub)
           <br><%= f.file_field :merchepub, accept: 'application/epub' %>    
@@ -91,6 +72,7 @@ All items offered for sale through CrowdPublish.TV are meant to be immediately a
       <br><%= f.file_field :podcast, accept: 'audio/mp3, audio/wav, audio/m4a' %> 
 
 <br><br>
+
 <%= radio_button_tag(:merchtype, "graphic") %>
 <%= label_tag(:merchtype_video, "Graphic (jpg, jpeg, gif, png, tif)") %>
 <br>
@@ -99,45 +81,18 @@ All items offered for sale through CrowdPublish.TV are meant to be immediately a
       <br><%= f.file_field :graphic, accept: 'image/jpg, image/jpeg, image/gif, image/png, image/tif' %> 
  
 <br><br>
-    
-<!--
-
-      <b>Document</b>  (download as many as applicable)<br>
-      <b>PDF </b><br>
-          Upload a PDF for your patrons to download (.pdf)
-          <br><%= f.file_field :merchpdf, accept: 'application/pdf' %> 
-      <b>mobi </b><br>
-          Upload a MOBI file for your patrons to download (.mobi)
-          <br><%= f.file_field :merchmobi, accept: 'application/mobi' %> 
-      <b>ePub </b><br>
-          Upload an ePub for your patrons to download (.epub)
-          <br><%= f.file_field :merchepub, accept: 'application/epub' %>     
-
-    <br><br>
-
-    <b>Perk podcast/audio </b><br>
-        Upload a podcast or audio file for your patrons to download (.mp3, .wav, or .m4a)
-        <br><%= f.file_field :podcast, accept: 'audio/mp3, audio/wav, audio/m4a' %> 
-    
-    <b>Perk graphic </b><br>
-        Upload a graphic for your patrons to download (.jpg, .jpeg, .gif, .png, or .tif)
-        <br><%= f.file_field :graphic, accept: 'image/jpg, image/jpeg, image/gif, image/png, image/tif' %> 
-
-    <b>Perk video </b><br>
-        Upload a video for your patrons to download (in avi or mp4 format)
-        <br><%= f.file_field :video, accept: 'video/avi, video/mp4' %> 
--->
 
 
     <b>Perk Picture </b><br>
         Upload a picture that represents the item you are offering (.jpg, .gif, .jpeg, or .png) - <i>a square picture works best</i>
         <br><%= f.file_field :itempic %> 
+        <br><br>
     <b>About this perk </b> - You may add to this later<br>
     <%= f.text_area :desc, cols: 82, :rows => 7, placeholder: "What is this product? What is the main reason someone might want this item?" %><br><br>
     <b>Price </b><br>
       $<%= f.text_field :price, size: 70, value: 50.00 || :price %>USD<br>
   </div>
-
+<br><br>
   <div class="blacktxt">
     <b>Video </b><br>
       If you have a video about your item on <b>YouTube</b>, paste the YouTube URL below. Your video's 11-digit ID will be saved. Any non-YouTube url will be ignored. <br /> 
@@ -149,7 +104,7 @@ All items offered for sale through CrowdPublish.TV are meant to be immediately a
     <b>Get It While It's Hot! </b><br>
     What day do fans have to purchase this Perk before?<br>
     <%= f.date_select :expiration, selected: Date.today + 2.months, :start_year => Date.today.year, :end_year => Date.today.year + 1 %>
-
+    <br><br>
   <div class="actions">
     <%= f.submit "Add Perk" %>
   </div>
@@ -167,5 +122,4 @@ All items offered for sale through CrowdPublish.TV are meant to be immediately a
 <% end %>
 </div>
 </div>
-
 

@@ -28,42 +28,36 @@
     <% end %><br>
 
 <p>
-  <b>Event title:</b>
+  <b>Discussion topic:</b>
   <%= @event.name %>
 </p>
 <p>
-  <b>Event host:
+  <b>Discussion host:
   <%= link_to @user.name, user_profile_path(@user.permalink) %> </b>
 </p>
 <p>
+  <% edt = @event.start_at + 3.hours %> 
   <b>Start time:</b>
-  <%= @event.start_at.strftime("%A %B %d, %Y at %I:%M %p") %>
+  <%= @event.start_at.strftime("%A %B %d, %Y at %I:%M %p") %> Pacific Time<br> (<%= edt.strftime("%I:%M %p") %> Eastern Time, NY USA)
 </p>
 <p>
+  <% edtend = @event.end_at + 3.hours %> 
   <b>End time:</b>
-  <%= @event.end_at.strftime("%A %B %d, %Y at %I:%M %p") %>
+  <%= @event.end_at.strftime("%A %B %d, %Y at %I:%M %p") %> Pacific Time<br> (<%= edtend.strftime("%I:%M %p") %> Eastern Time, NY USA)
 </p>
 <p>
-  <b>Event description:</b>
+  <b>More details:</b>
   <% if @event.desc %> 
     <%= simple_format @event.desc.gsub(/\n/, '<br>') %>
   <% end %>
 </p>
 <p>
-  <b>Where:</b>
-  <%= @event.address %><p>
-</p>
 
-  <% if @event.address != "livestream" %> 
-    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=11&markers=#{@event.latitude}%2C#{@event.longitude}" %><br><br><br>
-  <% else %>
-    at <%= link_to @user.name + "'s livestream site", user_stream_path(@user.permalink) %> </b>
-  <% end %>
-  </div>
-
-  <div class="col-md-3 col-sm-3 col-xs-3 " style= "text-align:left" >
+  <div style= "text-align:left" >
+    <% if @rsvpusers.sum(:guests) + @rsvpusers.count > 5 %> 
       <b><%= @rsvpusers.sum(:guests) + @rsvpusers.count %> guests said they'll be there</b><br> 
-      <br> -- RSVPs are a new feature -- 
+    <% end %>
+      <br><br> -- RSVPs are a new feature -- 
       <br>Invite friends & colleagues to sign up & RSVP for this event! Send them an email with this link: http://www.CrowdPublish.TV/events/<%= @event.id %> <br><br>
 
       <% @rsvpusers.each do |rsvpuser| %>
@@ -76,5 +70,5 @@
         <% end %><br>
       <% end %>
   </div>
-</div>  
 <br><br>
+</div>  

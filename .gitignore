@@ -10,9 +10,15 @@ config/database.yml
 config/environments/development.rb
 .DS_Store
 <<<<<<< HEAD
+<<<<<<< HEAD
 public/phase/
 public/book/
 tutorial/
 =======
 public/book/
 >>>>>>> c2203ada9113c78496f81e0fab1eaeb24007c78d
+=======
+public/book/
+Gemfile
+Gemfile.lock
+>>>>>>> 9629a2c05fbf4c67463c558eb1817ae982c73651

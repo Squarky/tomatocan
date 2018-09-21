@@ -21,3 +21,16 @@ class MerchandiseTest < ActiveSupport::TestCase
       refute_equal("http://youtube.com/watch?v=/frlviTJc", @merchandise.youtube)
       end
 end
+
+
+class pdfTest < ActiveSupport::TestCase
+  test "has a merchpdf" do
+    merchandise = merchandises(:merchandise_with_merchpdf)
+    assert File.exists?(merchandise.merchpdf.file.path)
+  end
+
+  test "uploads a merchpdf" do
+    user = Merchandise.create!(:merchpdf, fixture_file_upload('/files/fox.pdf', 'file/epub'))
+    assert(File.exists?(merchandise.reload.merchpdf.file.path))
+  end
+end

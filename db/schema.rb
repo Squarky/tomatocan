@@ -20,11 +20,7 @@ ActiveRecord::Schema.define(version: 20130201000000000) do
     t.datetime "approved"
   end
 
-<<<<<<< HEAD
-  create_table "books", id: :serial, force: :cascade do |t|
-=======
   create_table "books", force: :cascade do |t|
->>>>>>> 9abd32a445906c8bbeb7012e9f3115e06956f80f
     t.string "title"
     t.text "blurb"
     t.date "releasedate"
@@ -48,11 +44,7 @@ ActiveRecord::Schema.define(version: 20130201000000000) do
     t.string "bkvideodesc2"
   end
 
-<<<<<<< HEAD
-  create_table "events", id: :serial, force: :cascade do |t|
-=======
   create_table "events", force: :cascade do |t|
->>>>>>> 9abd32a445906c8bbeb7012e9f3115e06956f80f
     t.string "name"
     t.datetime "start_at"
     t.datetime "end_at"
@@ -69,11 +61,7 @@ ActiveRecord::Schema.define(version: 20130201000000000) do
     t.integer "usrid"
   end
 
-<<<<<<< HEAD
-  create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
-=======
   create_table "friendly_id_slugs", force: :cascade do |t|
->>>>>>> 9abd32a445906c8bbeb7012e9f3115e06956f80f
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
@@ -85,11 +73,7 @@ ActiveRecord::Schema.define(version: 20130201000000000) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
-<<<<<<< HEAD
-  create_table "groups", id: :serial, force: :cascade do |t|
-=======
   create_table "groups", force: :cascade do |t|
->>>>>>> 9abd32a445906c8bbeb7012e9f3115e06956f80f
     t.string "name"
     t.string "address"
     t.float "latitude"
@@ -112,11 +96,7 @@ ActiveRecord::Schema.define(version: 20130201000000000) do
     t.index ["slug"], name: "index_groups_on_slug", unique: true
   end
 
-<<<<<<< HEAD
-  create_table "merchandises", id: :serial, force: :cascade do |t|
-=======
   create_table "merchandises", force: :cascade do |t|
->>>>>>> 9abd32a445906c8bbeb7012e9f3115e06956f80f
     t.string "name"
     t.integer "user_id"
     t.float "price"
@@ -130,10 +110,10 @@ ActiveRecord::Schema.define(version: 20130201000000000) do
     t.string "podcast"
     t.string "video"
     t.string "graphic"
+    t.string "bookepub"
+    t.string "bookmobi"
+    t.string "bookpdf"
     t.datetime "expiration"
-    t.string "merchpdf"
-    t.string "merchmobi"
-    t.string "merchepub"
   end
 
   create_table "movieroles", force: :cascade do |t|
@@ -164,11 +144,7 @@ ActiveRecord::Schema.define(version: 20130201000000000) do
     t.date "releasedate"
   end
 
-<<<<<<< HEAD
-  create_table "phases", id: :serial, force: :cascade do |t|
-=======
   create_table "phases", force: :cascade do |t|
->>>>>>> 9abd32a445906c8bbeb7012e9f3115e06956f80f
     t.string "name"
     t.integer "user_id"
     t.text "mission"
@@ -230,11 +206,7 @@ ActiveRecord::Schema.define(version: 20130201000000000) do
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD
-  create_table "users", id: :serial, force: :cascade do |t|
-=======
   create_table "users", force: :cascade do |t|
->>>>>>> 9abd32a445906c8bbeb7012e9f3115e06956f80f
     t.string "name"
     t.string "email"
     t.text "ustreamvid"

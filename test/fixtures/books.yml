@@ -8,7 +8,7 @@ one:
   genre: MyString
   fiftychar: MyString
   price: 1.5
-  bookpdf: MyString
+  bookpdf: BOOK one
   coverpic: MyString
   coverpicurl: MyString
 
@@ -20,6 +20,6 @@ two:
   genre: MyString
   fiftychar: MyString
   price: 1.5
-  bookpdf: MyString
+  bookpdf: THIS IS BOOKTITLE 2
   coverpic: MyString
   coverpicurl: MyString

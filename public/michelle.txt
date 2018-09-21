@@ -39,3 +39,9 @@ Goals week of Sept 17
 - finish uploader pages if necessary
 - on home page, when click on a Host, bring to host page and also open lifestream window (hangouts).  Javascript
 - On http://localhost:3000/merchandises/standardperks page, draw attention at top of page to Documents and maybe one other perk, then list the rest on the bottom.  Make it prettier.
+
+Week of Sept 24:
+look at merchpdf_uploader.rb and merchandises_controller_test.rb.
+The PDF gets saved as a file.  How to test whether a file a) exists and b) gets uploaded?  
+Also may change merchandises_controller_test to somewhere besides test/integration
+Should do more tutorial at home, but probably won’t

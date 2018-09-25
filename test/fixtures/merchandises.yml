@@ -6,6 +6,8 @@ one:
   price: 1.5
   desc: MyText
   itempic: MyString
+  merchpdf: fox.pdf
+  
 
 two:
   name: MyString
@@ -13,3 +15,5 @@ two:
   price: 1.5
   desc: MyText
   itempic: MyString
+  itempic: MyString
+  merchpdf: fox.pdf

@@ -1,20 +1,16 @@
 require 'test_helper'
 
+CarrierWave.root = 'test/fixtures/files'
+
 #class merchpdfInterfaceTest < ActionDispatch::IntegrationTest
  class MerchandisesIntegrationTest < ActiveSupport::TestCase
 
-  def setup
-    @book = books(:one)
-  end
   
   test "has a merchpdf" do
-  	get store_dir
-    book = books(:bookpdf)
-    assert File.exists?(book.bookpdf.file.path)
+    #merchandise = merchandises(:merchpdf)
+    assert File.exists?(merchandise.merchpdf.file.path)
+    #puts "generated id = #{merchandises(:merchpdf)}"
   end
 
-  test "uploads a bookpdf" do
-    book = books.create!(:bookpdf, fixture_file_upload('test/files/fox.pdf', 'file/epub'))
-    assert(File.exists?(merchandise.reload.merchpdf.file.path))
-  end
+
 end

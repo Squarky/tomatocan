@@ -45,3 +45,6 @@ look at merchpdf_uploader.rb and merchandises_controller_test.rb.
 The PDF gets saved as a file.  How to test whether a file a) exists and b) gets uploaded?  
 Also may change merchandises_controller_test to somewhere besides test/integration
 Should do more tutorial at home, but probably won’t
+
+Figure out how to get generated ID for testing file storage
+To fix "merchandises does not have a column named merchpdf" error try renaming test database in database.yml.  Also try config/environments/test.rb and check the configuration for test environment

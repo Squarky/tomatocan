@@ -53,62 +53,7 @@ main {
     100%{top:0em;}
 }
 
-<<<<<<< HEAD:app/assets/stylesheets/custom.css.scss
-//Events Table
-/*div.helps h2 {
-    font-size: 1em !important;
-}*/
-#tableHost {
-    font-size: .6em !important;
-    color: $brand-primary;
-    font-weight: 400;
-}
-div.helps th {
-    font-family: $font-stack;
-    font-weight: 700;
-    font-size: .8em;
-}
-div.helps td {
-    font-family: $font-stack;
-    font-weight: 400;
-    font-size: .6em;
-}
-div.helps #editEvent {
-    font-size: .8em;
-}
-div.helps a:link {
-    color: $brand-secondary;
-}
-div.helps a:visited {
-    color: $brand-secondary;
-}
-//footer
-
-footer p.f-header {
-    font-family: $font-stack;
-    font-size: .85em;
-    margin: 0;
-    padding: 0;
-}
-footer a.f-link {
-    color: $brand-primary;
-    font-family: $font-stack;
-    font-size: 1em;
-}
-/* Working --------------------------------------------------- */
-/* mixins, variables, etc. */
-
-$grayMediumLight: #eaeaea;
-
-/* universal */
-
-html {
-  width: 100%;
-  overflow-y: scroll;
-}
-=======
 //= Leftover stylesheet pieces, left in case they break anything. They likely need to be moved to individual stylesheets.
->>>>>>> 4eb32fd8b5706bd3c1ace32caf30f92ad27dbd28:app/assets/stylesheets/base/_globals.scss
 
 
 .hometop {

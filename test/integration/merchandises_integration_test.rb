@@ -7,7 +7,8 @@ require 'test_helper'
     @book = books(:one)
   end
   
-  test "has a bookpdf" do
+  test "has a merchpdf" do
+  	get store_dir
     book = books(:bookpdf)
     assert File.exists?(book.bookpdf.file.path)
   end
